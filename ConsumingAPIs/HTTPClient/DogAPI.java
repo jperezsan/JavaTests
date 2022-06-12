@@ -7,7 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
@@ -27,7 +26,6 @@ public class DogAPI {
                 .build();
 
         // Sending request and getting a response. Body is expected to be a String.
-
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         System.out.println("Status: " + response.statusCode());
@@ -46,7 +44,8 @@ public class DogAPI {
         try {           
             
             Object obj  = parser.parse(response.body());
-            System.out.println(((JSONObject)obj).get("message"));            
+            JSONObject jobj = (JSONObject)obj;
+            System.out.println(jobj.get("message"));            
             
         } catch(ParseException pe) {
 		
